@@ -1,0 +1,220 @@
+\documentclass{beamer}
+
+\mode<presentation> {
+    \usetheme{Frankfurt}
+    \setbeamertemplate{footline}[page number]
+    \setbeamertemplate{navigation symbols}{}
+}
+
+\usepackage{graphicx}
+\usepackage{booktabs}
+
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\graphicspath{ {images/} }
+\usepackage[export]{adjustbox}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[Configuration Management @ CERN]{Configuration Management @ CERN\\*Going Agile with Style}
+\author{Andrea Giardini}
+
+\institute[CERN]
+{
+CERN \\
+\medskip
+\textit{andrea.giardini@cern.ch}
+}
+\date{24 April 2015 - PuppetCamp Berlin} % Date, can be changed to a custom date
+
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Overview}
+\tableofcontents
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+%	PRESENTATION SLIDES
+%----------------------------------------------------------------------------------------
+
+%------------------------------------------------
+\section{Introduction}
+%------------------------------------------------
+
+\subsection{What we do at CERN}
+
+\begin{frame}
+
+    \frametitle{What is CERN}
+    \begin{minipage}[t]{0.95\textwidth}
+        \begin{columns}
+            \begin{column}{0.5\textwidth}
+                \begin{itemize}
+                    \item European Organization for Nuclear Research
+                    \item Situated in the border between Switzerland and France
+                    \item 21 Member states
+                    \item Big challenges 
+                \end{itemize}
+            \end{column}
+            \begin{column}{0.5\textwidth}
+                \includegraphics[width=1.1\textwidth]{CernMap.jpg}
+            \end{column}
+        \end{columns}
+    \end{minipage}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+    \frametitle{Big Challenges - The FCC}
+    \includegraphics[width=1.0\textwidth,trim=4 4 4 4,clip]{CERN_LCC.jpg}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+    \frametitle{The LHC}
+    \includegraphics[width=1.0\textwidth,trim=4 4 4 4,clip]{Cern-Accelerator-Complex2.jpg}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+    \frametitle{The Accelerators}
+    \includegraphics[width=1.0\textwidth,trim=4 4 4 4,clip]{Atlas.jpg}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+    \frametitle{Data Flow}
+    \includegraphics[width=1.0\textwidth,trim=4 4 4 4,clip]{LHC_DataFlow.png}
+\end{frame}
+
+%------------------------------------------------
+
+\subsection{Datacenters in Numbers}
+\begin{frame}
+    \frametitle{Datacenters}
+    \begin{minipage}[t]{0.95\textwidth}
+        \begin{columns}
+            \begin{column}{0.5\textwidth}
+                Two datacenters:
+                \begin{itemize}
+                    \item Budapest
+                    \item Geneva
+                \end{itemize}
+                Two dedicated links:
+                \begin{itemize}
+                    \item 2 x 100Gbps
+                \end{itemize}
+                \vspace{0.2in} 
+                The number of resources is growing year by year.
+                As today:
+                \begin{itemize}
+                    \item 15k servers
+                    \item 100PB on tape
+                    \item 200PB on disk
+                \end{itemize}
+            \end{column}
+            \begin{column}{0.5\textwidth}
+                \includegraphics[width=1.1\textwidth]{DC_overview.png}
+                \vspace{0.2in} 
+                \includegraphics[width=1.1\textwidth]{Server_back.jpg}
+            \end{column}
+        \end{columns}
+    \end{minipage}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+    \frametitle{Going Agile}
+    \begin{minipage}[t]{0.95\textwidth}
+        \begin{columns}
+            \begin{column}{0.7\textwidth}
+                Requirements started to grow
+                \begin{itemize}
+                    \item Agile approach was needed
+                \end{itemize}
+                \vspace{0.2in} 
+                Since a few years we started using Openstack to deploy virtual machines for our users and Puppet to configure the services 
+            \end{column}
+            \begin{column}{0.3\textwidth}
+                \includegraphics[width=1\textwidth]{openstack-logo512.png}
+            \end{column}
+        \end{columns}
+    \end{minipage}
+    \vspace{\belowdisplayskip}
+    \begin{minipage}[t]{0.95\textwidth}
+        \includegraphics[width=1.1\textwidth]{Eos-CreatedVm.png}
+    \end{minipage}
+\end{frame}
+
+%------------------------------------------------
+\section{Puppet @ CERN}
+%------------------------------------------------
+
+\subsection{Current Infrastructure}
+\begin{frame}
+    \frametitle{Current Setup}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+    \frametitle{Clusters and Pools}
+\end{frame}
+
+%------------------------------------------------
+\section{Configuration Management}
+%------------------------------------------------
+
+\subsection{Managing configuration changes}
+\begin{frame}
+    \frametitle{Git repositories}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+    \frametitle{QA workflow}
+\end{frame}
+
+%------------------------------------------------
+
+\subsection{Tools}
+\begin{frame}
+    \frametitle{Continuous Integration}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+    \frametitle{Jens}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+    \frametitle{Mco}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+    \frametitle{Package Inventory}
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+
+\end{document} 
