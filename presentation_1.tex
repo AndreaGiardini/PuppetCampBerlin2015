@@ -1,16 +1,17 @@
-\documentclass{beamer}
+\documentclass[aspectratio=169]{beamer}
 
-\mode<presentation> {
-    \usetheme{Frankfurt}
-    \setbeamertemplate{footline}[page number]
-    \setbeamertemplate{navigation symbols}{}
-}
+\usetheme{CERN}
+
+\beamertemplatenavigationsymbolsempty
 
 \usepackage{graphicx}
 \usepackage{booktabs}
 
+\usepackage{xcolor}
 \usepackage{graphicx}
+\usepackage{multicol}
 \usepackage{wrapfig}
+
 \graphicspath{ {images/} }
 \usepackage[export]{adjustbox}
 
@@ -20,6 +21,7 @@
 
 \title[Configuration Management @ CERN]{Configuration Management @ CERN\\*Going Agile with Style}
 \author{Andrea Giardini}
+\date{\today}
 
 \institute[CERN]
 {
@@ -31,6 +33,8 @@ CERN \\
 
 
 \begin{document}
+
+\cernSplashBlue
 
 \begin{frame}
 \titlepage
@@ -76,28 +80,36 @@ CERN \\
 
 \begin{frame}
     \frametitle{Big Challenges - The FCC}
-    \includegraphics[width=1.0\textwidth,trim=4 4 4 4,clip]{CERN_LCC.jpg}
+    \begin{center}
+    \includegraphics[width=0.65\textwidth,trim=4 4 4 4,clip]{CERN_LCC.jpg}
+\end{center}
 \end{frame}
 
 %------------------------------------------------
 
 \begin{frame}
     \frametitle{The LHC}
-    \includegraphics[width=1.0\textwidth,trim=4 4 4 4,clip]{Cern-Accelerator-Complex2.jpg}
+    \begin{center}
+    \includegraphics[width=0.65\textwidth,trim=4 4 4 4,clip]{Cern-Accelerator-Complex2.jpg}
+\end{center}
 \end{frame}
 
 %------------------------------------------------
 
 \begin{frame}
     \frametitle{The Accelerators}
-    \includegraphics[width=1.0\textwidth,trim=4 4 4 4,clip]{Atlas.jpg}
+    \begin{center}
+    \includegraphics[width=0.7\textwidth,trim=4 4 4 4,clip]{Atlas.jpg}
+    \end{center}
 \end{frame}
 
 %------------------------------------------------
 
 \begin{frame}
     \frametitle{Data Flow}
-    \includegraphics[width=1.0\textwidth,trim=4 4 4 4,clip]{LHC_DataFlow.png}
+    \begin{center}
+    \includegraphics[width=0.65\textwidth,trim=4 4 4 4,clip]{LHC_DataFlow.png}
+    \end{center}
 \end{frame}
 
 %------------------------------------------------
@@ -106,7 +118,7 @@ CERN \\
 \begin{frame}
     \frametitle{Datacenters}
     \begin{minipage}[t]{0.95\textwidth}
-        \begin{columns}
+        \begin{columns}[T]
             \begin{column}{0.5\textwidth}
                 Two datacenters:
                 \begin{itemize}
@@ -117,7 +129,7 @@ CERN \\
                 \begin{itemize}
                     \item 2 x 100Gbps
                 \end{itemize}
-                \vspace{0.2in} 
+                \vspace{0.1in} 
                 The number of resources is growing year by year.
                 As today:
                 \begin{itemize}
@@ -127,9 +139,9 @@ CERN \\
                 \end{itemize}
             \end{column}
             \begin{column}{0.5\textwidth}
-                \includegraphics[width=1.1\textwidth]{DC_overview.png}
                 \vspace{0.2in} 
-                \includegraphics[width=1.1\textwidth]{Server_back.jpg}
+                \includegraphics[width=1.1\textwidth]{DC_overview.png}
+                %\includegraphics[width=0.9\textwidth]{Server_back.jpg}
             \end{column}
         \end{columns}
     \end{minipage}
@@ -141,22 +153,24 @@ CERN \\
     \frametitle{Going Agile}
     \begin{minipage}[t]{0.95\textwidth}
         \begin{columns}
-            \begin{column}{0.7\textwidth}
+            \begin{column}{0.8\textwidth}
                 Requirements started to grow
                 \begin{itemize}
                     \item Agile approach was needed
                 \end{itemize}
-                \vspace{0.2in} 
                 Since a few years we started using Openstack to deploy virtual machines for our users and Puppet to configure the services 
             \end{column}
-            \begin{column}{0.3\textwidth}
-                \includegraphics[width=1\textwidth]{openstack-logo512.png}
+            \begin{column}{0.2\textwidth}
+                \includegraphics[width=0.9\textwidth]{openstack-logo512.png}
             \end{column}
         \end{columns}
     \end{minipage}
     \vspace{\belowdisplayskip}
+    \vspace{\belowdisplayskip}
     \begin{minipage}[t]{0.95\textwidth}
-        \includegraphics[width=1.1\textwidth]{Eos-CreatedVm.png}
+        \begin{center}
+        \includegraphics[width=0.83\textwidth]{Eos-CreatedVm.png}
+    \end{center}
     \end{minipage}
 \end{frame}
 
@@ -167,6 +181,14 @@ CERN \\
 \subsection{Current Infrastructure}
 \begin{frame}
     \frametitle{Current Setup}
+    We started using Puppet a few years ago and, since then, things evolved a lot...
+
+    We changed several time the configuration of our puppet masters in order to keep up with the requests and we found out that:
+
+    \begin{itemize}
+        \item Puppet scales horizontally quite well
+        \item The NFS filer underneath … does not
+    \end{itemize}
 \end{frame}
 
 %------------------------------------------------
