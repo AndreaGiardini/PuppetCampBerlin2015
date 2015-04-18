@@ -81,8 +81,8 @@ CERN \\
 \begin{frame}
     \frametitle{Big Challenges - The FCC}
     \begin{center}
-    \includegraphics[width=0.65\textwidth,trim=4 4 4 4,clip]{CERN_LCC.jpg}
-\end{center}
+        \includegraphics[width=0.65\textwidth,trim=4 4 4 4,clip]{CERN_LCC.jpg}
+    \end{center}
 \end{frame}
 
 %------------------------------------------------
@@ -90,8 +90,8 @@ CERN \\
 \begin{frame}
     \frametitle{The LHC}
     \begin{center}
-    \includegraphics[width=0.65\textwidth,trim=4 4 4 4,clip]{Cern-Accelerator-Complex2.jpg}
-\end{center}
+        \includegraphics[width=0.65\textwidth,trim=4 4 4 4,clip]{Cern-Accelerator-Complex2.jpg}
+    \end{center}
 \end{frame}
 
 %------------------------------------------------
@@ -99,7 +99,8 @@ CERN \\
 \begin{frame}
     \frametitle{The Accelerators}
     \begin{center}
-    \includegraphics[width=0.7\textwidth,trim=4 4 4 4,clip]{Atlas.jpg}
+        \vspace{-1em}
+        \includegraphics[width=0.7\textwidth,trim=4 4 4 4,clip]{Atlas.jpg}
     \end{center}
 \end{frame}
 
@@ -108,7 +109,7 @@ CERN \\
 \begin{frame}
     \frametitle{Data Flow}
     \begin{center}
-    \includegraphics[width=0.65\textwidth,trim=4 4 4 4,clip]{LHC_DataFlow.png}
+        \includegraphics[width=0.65\textwidth,trim=4 4 4 4,clip]{LHC_DataFlow.png}
     \end{center}
 \end{frame}
 
@@ -141,7 +142,6 @@ CERN \\
             \begin{column}{0.5\textwidth}
                 \vspace{0.2in} 
                 \includegraphics[width=1.1\textwidth]{DC_overview.png}
-                %\includegraphics[width=0.9\textwidth]{Server_back.jpg}
             \end{column}
         \end{columns}
     \end{minipage}
@@ -181,60 +181,300 @@ CERN \\
 \subsection{Current Infrastructure}
 \begin{frame}
     \frametitle{Current Setup}
-    We started using Puppet a few years ago and, since then, things evolved a lot...
+    We started using Puppet a few years ago and, since then, things evolved a lot \ldots
 
     We changed several time the configuration of our puppet masters in order to keep up with the requests and we found out that:
 
     \begin{itemize}
         \item Puppet scales horizontally quite well
-        \item The NFS filer underneath … does not
+        \item The NFS filer underneath \ldots does not
     \end{itemize}
 \end{frame}
 
 %------------------------------------------------
 
 \begin{frame}
+
     \frametitle{Clusters and Pools}
+    \begin{minipage}[t]{0.95\textwidth}
+        \begin{center}
+            \includegraphics[width=0.85\textwidth]{Puppet_Pools.png}
+        \end{center}
+    \end{minipage}
+    \begin{minipage}[T]{0.95\textwidth}
+        \begin{columns}
+            \begin{column}{0.5\textwidth}
+                \begin{itemize}
+                    \item Two Separate Pools
+                    \item Machines are assigned to one pool
+                \end{itemize}
+            \end{column}
+            \begin{column}{0.5\textwidth}
+                \begin{itemize}
+                    \item Batch $\sim 36$ machines
+                    \item Interactive $\sim 3$ machines
+                \end{itemize}
+            \end{column}
+        \end{columns}
+    \end{minipage}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+    
+    \frametitle{Few concepts}
+    \begin{itemize}
+        \item Modules ($\sim 280$)
+
+        The various modules available should be viewed as a library that your hostgroup code can reuse.
+        \newline
+        \item Hostgroups ($\sim 160$)
+
+        Groups of nodes that are part of the same service and have some configurations in common
+        \newline
+        \item Environments ($\sim 180$)
+
+        Environments are collections of modules and hostgroups at different development levels
+    \end{itemize}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+
+    \frametitle{Environments allow us to \ldots}
+
+    Environment "production"
+        $\rightarrow$ All modules/hg from "master" branch
+
+    Environment "qa"
+        $\rightarrow$ All modules/hg from "qa" branch
+    \newline 
+    \newline 
+    Custom environment (for testing purpose):
+    \begin{itemize}
+        \item Possibility to set a “default” branch
+        \item Specify specific branch for one or more modules/hostgroups
+    \end{itemize}
+
 \end{frame}
 
 %------------------------------------------------
 \section{Configuration Management}
 %------------------------------------------------
 
-\subsection{Managing configuration changes}
+\subsection{Configuration Management}
 \begin{frame}
-    \frametitle{Git repositories}
+    \frametitle{Manage changes}
+    \begin{minipage}[T]{0.95\textwidth}
+        \begin{columns}
+            \begin{column}{0.5\textwidth}
+                Three important concepts:
+                \begin{itemize}
+                    \item Modules
+                    \item Hostgroups
+                    \item Environments
+                \end{itemize}
+                A configuration change has to be approved through a request in Jira.
+                \newline
+                \newline
+                Every git repo has at least two branches:
+                \begin{itemize}
+                    \item master
+                    \item qa
+                \end{itemize}
+            \end{column}
+            \begin{column}{0.5\textwidth}
+                \begin{center}
+                    \includegraphics[width=0.85\textwidth]{Git-Logo-1788C.png}
+                    \\[2em]
+                    \includegraphics[width=0.85\textwidth]{{800px-JIRA_logo.svg}.png}
+                \end{center}
+            \end{column}
+        \end{columns}
+    \end{minipage}
+
 \end{frame}
 
 %------------------------------------------------
 
 \begin{frame}
-    \frametitle{QA workflow}
+    \frametitle{Puppet Run}
+    \vspace{-1em}
+    \begin{center}
+        \includegraphics[width=0.5\textwidth]{puppetrun3.png}
+    \end{center}
 \end{frame}
 
 %------------------------------------------------
 
 \subsection{Tools}
 \begin{frame}
-    \frametitle{Continuous Integration}
-\end{frame}
-
-%------------------------------------------------
-
-\begin{frame}
     \frametitle{Jens}
+    Jens creates Puppet environments for the Puppet Masters
+    \begin{itemize}
+        \item Using repository metadata and a list of environments definitions
+        \item Allows dynamic environments and isolates puppet code for different services
+    \end{itemize}
+    \newline
+    Has recently been opensourced on GitHub:
+
+    https://github.com/cernops/jens
+
+    Useful for those running different services under the same puppet infrastructure
 \end{frame}
 
 %------------------------------------------------
 
 \begin{frame}
-    \frametitle{Mco}
+    \frametitle{Jenkins and CI process}
+    \begin{minipage}[T]{0.95\textwidth}
+        \begin{columns}
+            \begin{column}{0.5\textwidth}
+                \begin{itemize}
+                    \item Machines are built and tested before merging a change to production
+                    \item More automation, less manual work
+                    \item Still work in progress, but looks promising
+                \end{itemize}
+            \end{column}
+            \begin{column}{0.5\textwidth}
+                \begin{center}
+                    \includegraphics[width=0.5\textwidth]{Jenkins_headshot.png}
+                \end{center}
+            \end{column}
+        \end{columns}
+    \end{minipage}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+    \frametitle{Dashboard}
+        \begin{center}
+            \includegraphics[width=0.8\textwidth]{CI-dashboard.png}
+        \end{center}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+    \frametitle{CRM Process}
+    Configuration change process:
+    \begin{itemize}
+        \item Modify a module on feature branch
+        \item Jenkins builds a test machine and runs test
+        \item Merging to qa
+        \item After one week, merging to production
+    \end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+    \frametitle{Automating procedures - RunDeck}
+    \begin{minipage}[T]{0.95\textwidth}
+        \begin{columns}
+            \begin{column}{0.5\textwidth}
+                \begin{center}
+                    \includegraphics[width=0.7\textwidth]{Rundeck.png}
+                \end{center}
+            \end{column}
+            \begin{column}{0.5\textwidth}
+                \begin{itemize}
+                    \item Tedious prone-error tasks replaced by executable code
+                    \item Handing off operational tasks to others
+                    \item Procedures as a list of individual and atomic steps 
+                    \item Ability to react to failure
+                \end{itemize}
+            \end{column}
+        \end{columns}
+    \end{minipage}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+    \frametitle{Renaming Procedure}
+    INSERT RENAMING IMAGE
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+    \frametitle{Mcollective}
+    \begin{minipage}[T]{0.95\textwidth}
+        \begin{columns}
+            \begin{column}{0.5\textwidth}
+                Framework for server orchestration and parallel job execution \\[2em]
+
+                Problems in the past with big clusters ( $\textgreater$ 3000 nodes) \\[2em]
+
+                Latest release improved a lot:
+                \begin{itemize}                
+                    \item Direct addressing
+                    \item New puppetDb discovery method
+                    \item Threaded Mode
+                    \item Batched requests
+                \end{itemize}
+            \end{column}
+%            \begin{column}{0.5\textwidth}
+%            \end{column}
+        \end{columns}
+   \end{minipage} 
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+    \frametitle{Configuration Drifts}
+    \begin{minipage}[t]{0.95\textwidth}
+        Configuration drifts started to be a problem:
+        \begin{itemize}
+            \item Out of sync machines
+            \item Possibility for service managers to have snapshots
+            \item Possibility to “freeze” their environment
+       \end{itemize}
+       It's not easy to keep all the configuration in sync
+    \end{minipage}
+    \vspace{\belowdisplayskip}
+    \begin{minipage}[t]{0.95\textwidth}
+        \begin{center}
+            \includegraphics[width=0.5\textwidth]{package.png}
+        \end{center}
+    \end{minipage}
 \end{frame}
 
 %------------------------------------------------
 
 \begin{frame}
     \frametitle{Package Inventory}
+    \begin{minipage}[t]{0.95\textwidth}
+        Centralized service for package inventory:
+        \begin{itemize}
+            \item Using Elasticsearch
+            \item Queryable using Cli
+            \item Compare a set of hosts
+            \item Reports differences and misalignments
+            \item Package History
+        \end{itemize}
+    \end{minipage}
+    \vspace{\belowdisplayskip}
+    \vspace{\belowdisplayskip}
+    \begin{minipage}[t]{0.95\textwidth}
+        \begin{center}
+            \includegraphics[width=0.8\textwidth]{pkginv_demo.png}
+        \end{center}
+    \end{minipage}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+    \frametitle{Conclusions}
 \end{frame}
 
 %----------------------------------------------------------------------------------------
