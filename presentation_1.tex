@@ -41,7 +41,7 @@ CERN \\
 \end{frame}
 
 \begin{frame}
-\frametitle{Overview}
+\frametitle{Outline}
 \tableofcontents
 \end{frame}
 
@@ -53,7 +53,7 @@ CERN \\
 \section{Introduction}
 %------------------------------------------------
 
-\subsection{What we do at CERN}
+\subsection{What is CERN}
 
 \begin{frame}
 
@@ -109,15 +109,16 @@ CERN \\
 \begin{frame}
     \frametitle{Data Flow}
     \begin{center}
+        \vspace{-1em}
         \includegraphics[width=0.65\textwidth,trim=4 4 4 4,clip]{LHC_DataFlow.png}
     \end{center}
 \end{frame}
 
 %------------------------------------------------
 
-\subsection{Datacenters in Numbers}
+\subsection{Datacenters Overview}
 \begin{frame}
-    \frametitle{Datacenters}
+    \frametitle{Datacenters in Numbers}
     \begin{minipage}[t]{0.95\textwidth}
         \begin{columns}[T]
             \begin{column}{0.5\textwidth}
@@ -180,9 +181,9 @@ CERN \\
 
 \subsection{Current Infrastructure}
 \begin{frame}
-    \frametitle{Current Setup}
-    We started using Puppet a few years ago and, since then, things evolved a lot \ldots
-
+    \frametitle{Our Setup}
+    We started using Puppet a few years ago and, since then, things evolved a lot \ldots \\
+    \vspace{1em}
     We changed several time the configuration of our puppet masters in order to keep up with the requests and we found out that:
 
     \begin{itemize}
@@ -222,6 +223,7 @@ CERN \\
 
 %------------------------------------------------
 
+\subsection{Modules, Hostgroups and Environments}
 \begin{frame}
     
     \frametitle{Few concepts}
@@ -236,7 +238,7 @@ CERN \\
         \newline
         \item Environments ($\sim 180$)
 
-        Environments are collections of modules and hostgroups at different development levels
+        Collections of modules and hostgroups at different development levels
     \end{itemize}
 
 \end{frame}
@@ -254,7 +256,7 @@ CERN \\
         $\rightarrow$ All modules/hg from "qa" branch
     \newline 
     \newline 
-    Custom environment (for testing purpose):
+    Custom environments (for testing purpose):
     \begin{itemize}
         \item Possibility to set a “default” branch
         \item Specify specific branch for one or more modules/hostgroups
@@ -266,7 +268,7 @@ CERN \\
 \section{Configuration Management}
 %------------------------------------------------
 
-\subsection{Configuration Management}
+\subsection{Managing Changes}
 \begin{frame}
     \frametitle{Manage changes}
     \begin{minipage}[T]{0.95\textwidth}
@@ -319,11 +321,13 @@ CERN \\
         \item Using repository metadata and a list of environments definitions
         \item Allows dynamic environments and isolates puppet code for different services
     \end{itemize}
-    \newline
-    Has recently been opensourced on GitHub:
-
-    https://github.com/cernops/jens
-
+    \vspace{2em}
+    Has recently been opensourced on GitHub: \\
+    \vspace{1em}
+    \begin{center}
+        \textbf{https://github.com/cernops/jens} \\
+    \end{center}
+    \vspace{1em}
     Useful for those running different services under the same puppet infrastructure
 \end{frame}
 
@@ -365,6 +369,7 @@ CERN \\
     Configuration change process:
     \begin{itemize}
         \item Modify a module on feature branch
+        \item Create a custom env and test the module
         \item Jenkins builds a test machine and runs test
         \item Merging to qa
         \item After one week, merging to production
@@ -387,7 +392,7 @@ CERN \\
                     \item Tedious prone-error tasks replaced by executable code
                     \item Handing off operational tasks to others
                     \item Procedures as a list of individual and atomic steps 
-                    \item Ability to react to failure
+                    \item Ability to react to failures
                 \end{itemize}
             \end{column}
         \end{columns}
@@ -397,8 +402,10 @@ CERN \\
 %------------------------------------------------
 
 \begin{frame}
-    \frametitle{Renaming Procedure}
-    INSERT RENAMING IMAGE
+    \frametitle{Renaming hosts}
+    \begin{center}
+        \includegraphics[width=0.9\textwidth]{RunDeck_rename.png}
+    \end{center}
 \end{frame}
 
 %------------------------------------------------
@@ -410,7 +417,8 @@ CERN \\
             \begin{column}{0.5\textwidth}
                 Framework for server orchestration and parallel job execution \\[2em]
 
-                Problems in the past with big clusters ( $\textgreater$ 3000 nodes) \\[2em]
+                Problems in the past with big clusters \\
+                $\textgreater$ 3000 nodes \\[2em]
 
                 Latest release improved a lot:
                 \begin{itemize}                
@@ -420,8 +428,9 @@ CERN \\
                     \item Batched requests
                 \end{itemize}
             \end{column}
-%            \begin{column}{0.5\textwidth}
-%            \end{column}
+            \begin{column}{0.5\textwidth}
+            \includegraphics[width=1.1\textwidth]{mco.png}
+            \end{column}
         \end{columns}
    \end{minipage} 
 \end{frame}
@@ -472,11 +481,36 @@ CERN \\
 \end{frame}
 
 %------------------------------------------------
+\section{Conclusions}
+%------------------------------------------------
 
 \begin{frame}
     \frametitle{Conclusions}
+    Moving from a traditional infrastructure to an Agile one allowed us to:
+    \begin{itemize}
+        \item Optimize our resources
+        \item Speed up the development cycle
+        \item Reduce interventions time
+        \item Have more free time :)
+    \end{itemize}
 \end{frame}
 
 %----------------------------------------------------------------------------------------
+
+\begin{frame}
+    \frametitle{Conclusions}
+    Puppet gives us the right combination between elasticity and efficiency \\
+
+    \begin{itemize}
+        \item Big community
+        \item Active development
+        \item Highly customizable
+    \end{itemize}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+
+\cernSplashBlue
 
 \end{document} 
