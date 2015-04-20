@@ -334,6 +334,20 @@ CERN \\
 %------------------------------------------------
 
 \begin{frame}
+    \frametitle{CRM Process}
+    Configuration change process:
+    \begin{itemize}
+        \item Modify a module on feature branch
+        \item Create a custom env and test the module
+        \item Open a ticket on Jira and announce the change
+        \item Merge to qa
+        \item After one week, merge to production
+    \end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
     \frametitle{Jenkins and CI process}
     \begin{minipage}[T]{0.95\textwidth}
         \begin{columns}
@@ -360,20 +374,6 @@ CERN \\
         \begin{center}
             \includegraphics[width=0.8\textwidth]{CI-dashboard.png}
         \end{center}
-\end{frame}
-
-%------------------------------------------------
-
-\begin{frame}
-    \frametitle{CRM Process}
-    Configuration change process:
-    \begin{itemize}
-        \item Modify a module on feature branch
-        \item Create a custom env and test the module
-        \item Jenkins builds a test machine and runs test
-        \item Merging to qa
-        \item After one week, merging to production
-    \end{itemize}
 \end{frame}
 
 %------------------------------------------------
