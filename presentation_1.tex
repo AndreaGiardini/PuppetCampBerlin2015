@@ -19,7 +19,8 @@
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
 
-\title[Configuration Management @ CERN]{Configuration Management @ CERN\\*Going Agile with Style}
+\title[Configuration Management @ CERN]{Configuration Management @ CERN\\
+        *Going Agile with Style}
 \author{Andrea Giardini}
 \date{\today}
 
@@ -29,7 +30,7 @@ CERN \\
 \medskip
 \textit{andrea.giardini@cern.ch}
 }
-\date{24 April 2015 - PuppetCamp Berlin} % Date, can be changed to a custom date
+\date{24 April 2015 - PuppetCamp Berlin}
 
 
 \begin{document}
@@ -45,9 +46,9 @@ CERN \\
 \tableofcontents
 \end{frame}
 
-%----------------------------------------------------------------------------------------
+%------------------------------------------------
 %	PRESENTATION SLIDES
-%----------------------------------------------------------------------------------------
+%------------------------------------------------
 
 %------------------------------------------------
 \section{Introduction}
@@ -90,7 +91,8 @@ CERN \\
 \begin{frame}
     \frametitle{The LHC}
     \begin{center}
-        \includegraphics[width=0.65\textwidth,trim=4 4 4 4,clip]{Cern-Accelerator-Complex2.jpg}
+        \includegraphics[width=0.65\textwidth,trim=4 4 4 4,clip]
+            {Cern-Accelerator-Complex2.jpg}
     \end{center}
 \end{frame}
 
@@ -110,7 +112,8 @@ CERN \\
     \frametitle{Data Flow}
     \begin{center}
         \vspace{-1em}
-        \includegraphics[width=0.65\textwidth,trim=4 4 4 4,clip]{LHC_DataFlow.png}
+        \includegraphics[width=0.65\textwidth,trim=4 4 4 4,clip]
+            {LHC_DataFlow.png}
     \end{center}
 \end{frame}
 
@@ -159,7 +162,8 @@ CERN \\
                 \begin{itemize}
                     \item Agile approach was needed
                 \end{itemize}
-                Since a few years we started using Openstack to deploy virtual machines for our users and Puppet to configure the services 
+                Since a few years we started using Openstack to deploy virtual 
+                machines for our users and Puppet to configure the services 
             \end{column}
             \begin{column}{0.2\textwidth}
                 \includegraphics[width=0.9\textwidth]{openstack-logo512.png}
@@ -182,10 +186,12 @@ CERN \\
 \subsection{Current Infrastructure}
 \begin{frame}
     \frametitle{Our Setup}
-    We started using Puppet a few years ago and, since then, things evolved a lot \ldots \\
+    We started using Puppet a few years ago and, since then, 
+    things evolved a lot \ldots \\
     \vspace{1em}
-    We changed several time the configuration of our puppet masters in order to keep up with the requests and we found out that:
-
+    We changed several time the configuration of our puppet masters in order 
+    to keep up with the requests and we found out that:
+    
     \begin{itemize}
         \item Puppet scales horizontally quite well
         \item The NFS filer underneath \ldots does not
@@ -228,17 +234,19 @@ CERN \\
     
     \frametitle{Few concepts}
     \begin{itemize}
-        \item Modules ($\sim 280$)
+        \item Modules ($\sim 280$) \\
 
-        The various modules available should be viewed as a library that your hostgroup code can reuse.
+        The various modules available should be viewed as a library 
+        that your hostgroup code can reuse.
         \newline
-        \item Hostgroups ($\sim 160$)
+        \item Hostgroups ($\sim 160$) \\
 
-        Groups of nodes that are part of the same service and have some configurations in common
+        Groups of nodes that are part of the same service and have 
+        some configurations in common.
         \newline
-        \item Environments ($\sim 180$)
+        \item Environments ($\sim 180$) \\
 
-        Collections of modules and hostgroups at different development levels
+        Collections of modules and hostgroups at different development levels.
     \end{itemize}
 
 \end{frame}
@@ -261,6 +269,10 @@ CERN \\
         \item Possibility to set a “default” branch
         \item Specify specific branch for one or more modules/hostgroups
     \end{itemize}
+    \begin{center}
+        \includegraphics[width=0.35\textwidth]{Env_example.png} \,
+        \includegraphics[width=0.45\textwidth]{Env_example_commit.png}
+    \end{center}
 
 \end{frame}
 
@@ -280,7 +292,8 @@ CERN \\
                     \item Hostgroups
                     \item Environments
                 \end{itemize}
-                A configuration change has to be approved through a request in Jira.
+                A configuration change has to be approved through 
+                a request in Jira.
                 \newline
                 \newline
                 Every git repo has at least two branches:
@@ -293,7 +306,8 @@ CERN \\
                 \begin{center}
                     \includegraphics[width=0.85\textwidth]{Git-Logo-1788C.png}
                     \\[2em]
-                    \includegraphics[width=0.85\textwidth]{{800px-JIRA_logo.svg}.png}
+                    \includegraphics[width=0.85\textwidth]
+                        {{800px-JIRA_logo.svg}.png}
                 \end{center}
             \end{column}
         \end{columns}
@@ -319,7 +333,8 @@ CERN \\
     Jens creates Puppet environments for the Puppet Masters
     \begin{itemize}
         \item Using repository metadata and a list of environments definitions
-        \item Allows dynamic environments and isolates puppet code for different services
+        \item Allows dynamic environments and isolates puppet code 
+            for different services
     \end{itemize}
     \vspace{2em}
     Has recently been opensourced on GitHub: \\
@@ -328,13 +343,14 @@ CERN \\
         \textbf{https://github.com/cernops/jens} \\
     \end{center}
     \vspace{1em}
-    Useful for those running different services under the same puppet infrastructure
+    Useful for those running different services under the 
+    same puppet infrastructure
 \end{frame}
 
 %------------------------------------------------
 
 \begin{frame}
-    \frametitle{CRM Process}
+    \frametitle{Configuration Change Process}
     Configuration change process:
     \begin{itemize}
         \item Modify a module on feature branch
@@ -342,18 +358,23 @@ CERN \\
         \item Open a ticket on Jira and announce the change
         \item Merge to qa
         \item After one week, merge to production
-    \end{itemize}
+    \end{itemize} \\[2em]
+
+    Service managers use the same module for different services: we need to 
+    be sure that all the service managers are happy with the change before 
+    merging it to production.
 \end{frame}
 
 %------------------------------------------------
 
 \begin{frame}
-    \frametitle{Jenkins and CI process}
+    \frametitle{Jenkins and Continuous Integration process}
     \begin{minipage}[T]{0.95\textwidth}
         \begin{columns}
             \begin{column}{0.5\textwidth}
                 \begin{itemize}
-                    \item Machines are built and tested before merging a change to production
+                    \item Machines are built and tested before merging a 
+                        change to production
                     \item More automation, less manual work
                     \item Still work in progress, but looks promising
                 \end{itemize}
@@ -415,15 +436,16 @@ CERN \\
     \begin{minipage}[T]{0.95\textwidth}
         \begin{columns}
             \begin{column}{0.5\textwidth}
-                Framework for server orchestration and parallel job execution \\[2em]
+                Framework for server orchestration and parallel 
+                job execution \\[2em]
 
                 Problems in the past with big clusters \\
                 $\textgreater$ 3000 nodes \\[2em]
 
-                Latest release improved a lot:
+                Latest improvements:
                 \begin{itemize}                
                     \item Direct addressing
-                    \item New puppetDb discovery method
+                    \item New PuppetDB discovery method
                     \item Threaded Mode
                     \item Batched requests
                 \end{itemize}
@@ -495,7 +517,7 @@ CERN \\
     \end{itemize}
 \end{frame}
 
-%----------------------------------------------------------------------------------------
+%------------------------------------------------
 
 \begin{frame}
     \frametitle{Conclusions}
@@ -509,7 +531,7 @@ CERN \\
 
 \end{frame}
 
-%----------------------------------------------------------------------------------------
+%------------------------------------------------
 
 \cernSplashBlue
 
