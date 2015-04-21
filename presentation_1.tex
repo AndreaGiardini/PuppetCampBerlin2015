@@ -19,8 +19,8 @@
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
 
-\title[Configuration Management @ CERN]{Configuration Management @ CERN\\
-        *Going Agile with Style}
+\title[Configuration Management @ CERN]{Configuration Management @ CERN\\*
+    Going Agile with Style}
 \author{Andrea Giardini}
 \date{\today}
 
@@ -196,6 +196,10 @@ CERN \\
         \item Puppet scales horizontally quite well
         \item The NFS filer underneath \ldots does not
     \end{itemize}
+    \vspace{1em}
+    NFS is used to share configurations and Puppet code between 
+    different masters. \\
+    All the masters used to mount the same shared folder \ldots
 \end{frame}
 
 %------------------------------------------------
@@ -212,14 +216,15 @@ CERN \\
         \begin{columns}
             \begin{column}{0.5\textwidth}
                 \begin{itemize}
-                    \item Two Separate Pools
-                    \item Machines are assigned to one pool
+                    \item Catalog compilation time $\sim 90sec$
+                    \item Catalog compilation per minute $\sim 180$
+                    \item $\sim 17k$ hosts
                 \end{itemize}
             \end{column}
             \begin{column}{0.5\textwidth}
                 \begin{itemize}
-                    \item Batch $\sim 36$ machines
-                    \item Interactive $\sim 3$ machines
+                    \item Batch $\sim 300$ cores
+                    \item Interactive $\sim 12$ cores
                 \end{itemize}
             \end{column}
         \end{columns}
