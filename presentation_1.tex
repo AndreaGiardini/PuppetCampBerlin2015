@@ -20,7 +20,7 @@
 %----------------------------------------------------------------------------------------
 
 \title[Configuration Management @ CERN]{Configuration Management @ CERN\\*
-    Going Agile with Style}
+    }
 \author{Andrea Giardini}
 \date{\today}
 
@@ -30,12 +30,10 @@ CERN \\
 \medskip
 \textit{andrea.giardini@cern.ch}
 }
-\date{24 April 2015 - PuppetCamp Berlin}
+\date{17 June 2015}
 
 
 \begin{document}
-
-\cernSplashBlue
 
 \begin{frame}
 \titlepage
@@ -54,71 +52,6 @@ CERN \\
 \section{Introduction}
 %------------------------------------------------
 
-\subsection{What is CERN}
-
-\begin{frame}
-
-    \frametitle{What is CERN}
-    \begin{minipage}[t]{0.95\textwidth}
-        \begin{columns}
-            \begin{column}{0.5\textwidth}
-                \begin{itemize}
-                    \item European Organization for Nuclear Research
-                    \item Situated in the border between Switzerland and France
-                    \item 21 Member states
-                    \item Big challenges 
-                \end{itemize}
-            \end{column}
-            \begin{column}{0.5\textwidth}
-                \includegraphics[width=1.1\textwidth]{CernMap.jpg}
-            \end{column}
-        \end{columns}
-    \end{minipage}
-
-\end{frame}
-
-%------------------------------------------------
-
-\begin{frame}
-    \frametitle{Big Challenges - The FCC}
-    \begin{center}
-        \includegraphics[width=0.65\textwidth,trim=4 4 4 4,clip]{CERN_LCC.jpg}
-    \end{center}
-\end{frame}
-
-%------------------------------------------------
-
-\begin{frame}
-    \frametitle{The LHC}
-    \begin{center}
-        \includegraphics[width=0.65\textwidth,trim=4 4 4 4,clip]
-            {Cern-Accelerator-Complex2.jpg}
-    \end{center}
-\end{frame}
-
-%------------------------------------------------
-
-\begin{frame}
-    \frametitle{The Detectors}
-    \begin{center}
-        \vspace{-1em}
-        \includegraphics[width=0.7\textwidth,trim=4 4 4 4,clip]{Atlas.jpg}
-    \end{center}
-\end{frame}
-
-%------------------------------------------------
-
-\begin{frame}
-    \frametitle{Data Flow}
-    \begin{center}
-        \vspace{-1em}
-        \includegraphics[width=0.65\textwidth,trim=4 4 4 4,clip]
-            {LHC_DataFlow.png}
-    \end{center}
-\end{frame}
-
-%------------------------------------------------
-
 \subsection{Datacenters Overview}
 \begin{frame}
     \frametitle{Datacenters in Numbers}
@@ -134,7 +67,7 @@ CERN \\
                 \begin{itemize}
                     \item 2 x 100Gbps
                 \end{itemize}
-                \vspace{0.1in} 
+                \vspace{0.1in}
                 The number of resources is growing year by year.
                 As today:
                 \begin{itemize}
@@ -144,7 +77,7 @@ CERN \\
                 \end{itemize}
             \end{column}
             \begin{column}{0.5\textwidth}
-                \vspace{0.2in} 
+                \vspace{0.2in}
                 \includegraphics[width=1.1\textwidth]{DC_overview.png}
             \end{column}
         \end{columns}
@@ -162,8 +95,8 @@ CERN \\
                 \begin{itemize}
                     \item Agile approach was needed
                 \end{itemize}
-                Since a few years we started using Openstack to deploy virtual 
-                machines for our users and Puppet to configure the services 
+                Since a few years we started using Openstack to deploy virtual
+                machines for our users and Puppet to configure the services
             \end{column}
             \begin{column}{0.2\textwidth}
                 \includegraphics[width=0.9\textwidth]{openstack-logo512.png}
@@ -186,18 +119,18 @@ CERN \\
 \subsection{Current Infrastructure}
 \begin{frame}
     \frametitle{Our Setup}
-    We started using Puppet a few years ago and, since then, 
+    We started using Puppet a few years ago and, since then,
     things evolved a lot \ldots \\
     \vspace{1em}
-    We changed several time the configuration of our puppet masters in order 
+    We changed several time the configuration of our puppet masters in order
     to keep up with the requests and we found out that:
-    
+
     \begin{itemize}
         \item Puppet scales horizontally quite well
         \item The NFS filer underneath \ldots does not
     \end{itemize}
     \vspace{1em}
-    NFS is used to share configurations and Puppet code between 
+    NFS is used to share configurations and Puppet code between
     different masters. \\
     All the masters used to mount the same shared folder \ldots
 \end{frame}
@@ -216,7 +149,7 @@ CERN \\
         \begin{columns}
             \begin{column}{0.5\textwidth}
                 \begin{itemize}
-                    \item Catalog compilation time $\sim 90sec$ \\ $\sim 180$ 
+                    \item Catalog compilation time $\sim 90sec$ \\ $\sim 180$
                        catalogs / minute
                     %\item Catalog compilation per minute $\sim 180$
                     \item $\sim 17k$ Puppet hosts
@@ -237,17 +170,17 @@ CERN \\
 
 \subsection{Modules, Hostgroups and Environments}
 \begin{frame}
-    
+
     \frametitle{Few concepts}
     \begin{itemize}
         \item Modules ($\sim 280$) \\
 
-        The various modules available should be viewed as a library 
+        The various modules available should be viewed as a library
         that your hostgroup code can reuse.
         \newline
         \item Hostgroups ($\sim 160$) \\
 
-        Groups of nodes that are part of the same service and have 
+        Groups of nodes that are part of the same service and have
         some configurations in common.
         \newline
         \item Environments ($\sim 180$) \\
@@ -268,8 +201,8 @@ CERN \\
 
     Environment "qa"
         $\rightarrow$ All modules/hg from "qa" branch
-    \newline 
-    \newline 
+    \newline
+    \newline
     Custom environments (for testing purpose):
     \begin{itemize}
         \item Possibility to set a “default” branch
@@ -298,7 +231,7 @@ CERN \\
                     \item Hostgroups
                     \item Environments
                 \end{itemize}
-                A configuration change has to be approved through 
+                A configuration change has to be approved through
                 a request in Jira.
                 \newline
                 \newline
@@ -333,13 +266,40 @@ CERN \\
 
 %------------------------------------------------
 
+\begin{frame}
+    \frametitle{Foreman}
+    \begin{itemize}
+        \item 7 Servers
+        \item 2x UI, 2x ENC, 2x Reports, 1x Rake tasks
+        \item Running v1.3 + patches
+        \item Bugs/missing features preventing upgrade
+        \item Use as ENC for hostgroup membership and some variables
+        \item Inventory
+        \item Report Visualization
+        \item Kickstart generation
+    \end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+    \frametitle{PuppetDB}
+    \begin{itemize}
+        \item 2 Machines with PuppetDB and Postgres
+        \item Collects data generated by Puppet
+        \item Allows us to make fast queries
+    \end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
 \subsection{Tools}
 \begin{frame}
     \frametitle{Jens}
     Jens creates Puppet environments for the Puppet Masters
     \begin{itemize}
         \item Using repository metadata and a list of environments definitions
-        \item Allows dynamic environments and isolates puppet code 
+        \item Allows dynamic environments and isolates puppet code
             for different services
     \end{itemize}
     \vspace{2em}
@@ -349,7 +309,7 @@ CERN \\
         \textbf{https://github.com/cernops/jens} \\
     \end{center}
     \vspace{1em}
-    Useful for those running different services under the 
+    Useful for those running different services under the
     same puppet infrastructure
 \end{frame}
 
@@ -366,10 +326,10 @@ CERN \\
         \item After one week, merge to production
     \end{itemize}
 
-    Service managers use the same module for different services: we need to 
-    be sure that all the service managers are happy with the change before 
+    Service managers use the same module for different services: we need to
+    be sure that all the service managers are happy with the change before
     merging it to production.
-    
+
 \end{frame}
 
 %------------------------------------------------
@@ -380,7 +340,7 @@ CERN \\
         \begin{columns}
             \begin{column}{0.5\textwidth}
                 \begin{itemize}
-                    \item Machines are built and tested before merging a 
+                    \item Machines are built and tested before merging a
                         change to production
                     \item More automation, less manual work
                     \item Still work in progress, but looks promising
@@ -419,7 +379,7 @@ CERN \\
                 \begin{itemize}
                     \item Tedious prone-error tasks replaced by executable code
                     \item Handing off operational tasks to others
-                    \item Procedures as a list of individual and atomic steps 
+                    \item Procedures as a list of individual and atomic steps
                     \item Ability to react to failures
                 \end{itemize}
             \end{column}
@@ -443,14 +403,14 @@ CERN \\
     \begin{minipage}[T]{0.95\textwidth}
         \begin{columns}
             \begin{column}{0.5\textwidth}
-                Framework for server orchestration and parallel 
+                Framework for server orchestration and parallel
                 job execution \\[2em]
 
                 Problems in the past with big clusters \\
                 $\textgreater$ 3000 nodes \\[2em]
 
                 Latest improvements:
-                \begin{itemize}                
+                \begin{itemize}
                     \item Direct addressing
                     \item New PuppetDB discovery method
                     \item Threaded Mode
@@ -461,52 +421,7 @@ CERN \\
             \includegraphics[width=1.1\textwidth]{mco.png}
             \end{column}
         \end{columns}
-   \end{minipage} 
-\end{frame}
-
-%------------------------------------------------
-
-\begin{frame}
-    \frametitle{Configuration Drifts}
-    \begin{minipage}[t]{0.95\textwidth}
-        Configuration drifts started to be a problem:
-        \begin{itemize}
-            \item Out of sync machines
-            \item Possibility for service managers to have snapshots
-            \item Possibility to “freeze” their environment
-       \end{itemize}
-       It's not easy to keep all the configuration in sync
-    \end{minipage}
-    \vspace{\belowdisplayskip}
-    \begin{minipage}[t]{0.95\textwidth}
-        \begin{center}
-            \includegraphics[width=0.5\textwidth]{package.png}
-        \end{center}
-    \end{minipage}
-\end{frame}
-
-%------------------------------------------------
-
-\begin{frame}
-    \frametitle{Package Inventory}
-    \begin{minipage}[t]{0.95\textwidth}
-        Centralized service for package inventory:
-        \begin{itemize}
-            \item Using Elasticsearch
-            \item Queryable using Cli
-            \item Compare a set of hosts
-            \item Reports differences and misalignments
-            \item Package History
-        \end{itemize}
-    \end{minipage}
-    \vspace{\belowdisplayskip}
-    \vspace{\belowdisplayskip}
-    \begin{minipage}[t]{0.95\textwidth}
-        \begin{center}
-            \includegraphics[width=0.8\textwidth]{pkginv_demo.png}
-        \end{center}
-    \end{minipage}
-
+   \end{minipage}
 \end{frame}
 
 %------------------------------------------------
@@ -540,32 +455,6 @@ CERN \\
 
 %------------------------------------------------
 
-\begin{frame}
-    \frametitle{Questions?}
-
-    \begin{minipage}[T]{0.95\textwidth}
-        \begin{columns}
-            \begin{column}{0.5\textwidth}
-                \includegraphics[width=1\textwidth,trim=10 10 10 10,clip]{questions.jpg}
-            \end{column}
-            \begin{column}{0.5\textwidth}
-                \begin{center}
-                    \begin{large}
-                    Andrea Giardini \\[2em]
-
-                    andrea.giardini@cern.ch \\[2em]
-
-                    @GiardiniAndrea
-                    \end{large}
-                \end{center}
-            \end{column}
-
-        \end{columns}
-    \end{minipage}
-\end{frame}
-
-%------------------------------------------------
-
 \cernSplashBlue
 
-\end{document} 
+\end{document}
