@@ -367,6 +367,35 @@ CERN \\
 %------------------------------------------------
 
 \begin{frame}
+    \frametitle{Managing secrets - Tbag}
+    With shared modules and hostgroups we had to find a clever to store
+    secrets (password, keytab, certificates) \\[1em]
+
+    \begin{itemize}
+        \item Secrets are key/value pair
+            \item A secret can be set for host or hostgroup
+            \item Puppet module available to retrieve the secret using the key
+    \end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+    \frametitle{Pluginsync Filtering}
+    Each module exports a series of facts that collect data on the host. \\
+    By default puppet runs all the facts on every node and this can be dangerous
+    in a shared environment like ours. \\[2em]
+    Custom solution: Pluginsync Filtering
+
+    \begin{itemize}
+        \item Facts for non-common modules need to be whitelisted
+        \item Compromise between security and conveniencels
+    \end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
     \frametitle{Automating procedures - RunDeck}
     \begin{minipage}[T]{0.95\textwidth}
         \begin{columns}
